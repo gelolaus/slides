@@ -1,5 +1,29 @@
 @import "tailwindcss";
 
+/* ── Slide Transitions ─────────────────────────────────────────────────── */
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
 @keyframes fadeSlide {
   from {
     opacity: 0;
@@ -14,6 +38,140 @@
 .slide-enter {
   animation: fadeSlide 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
+
+.slide-enter-right {
+  animation: slideFromRight 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.slide-enter-left {
+  animation: slideFromLeft 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Background Orb Floats ─────────────────────────────────────────────── */
+
+@keyframes floatA {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(20px, -25px) scale(1.04); }
+  66%       { transform: translate(-15px, 15px) scale(0.97); }
+}
+
+@keyframes floatB {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%       { transform: translate(-25px, 20px) scale(1.05); }
+  70%       { transform: translate(18px, -12px) scale(0.96); }
+}
+
+@keyframes floatC {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%       { transform: translate(15px, 20px) scale(1.03); }
+  75%       { transform: translate(-20px, -18px) scale(0.98); }
+}
+
+/* ── Bullet Stagger ────────────────────────────────────────────────────── */
+
+@keyframes bulletIn {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.bullet-in {
+  animation: bulletIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Pulse Ring (photo glow / phone frame) ─────────────────────────────── */
+
+@keyframes pulseRing {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%       { opacity: 0.9;  transform: scale(1.1); }
+}
+
+.pulse-ring {
+  animation: pulseRing 3s ease-in-out infinite;
+}
+
+/* ── Radiating rings (thank-you slide) ─────────────────────────────────── */
+
+@keyframes radiate {
+  0%   { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* ── Shimmer (icon tiles — reserved) ──────────────────────────────────── */
+
+@keyframes shimmerTile {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Glass Card Shimmer Sweep ──────────────────────────────────────────── */
+
+@keyframes cardShimmer {
+  0%   { transform: translateX(-120%) skewX(-15deg); opacity: 1; }
+  70%  { transform: translateX(120%) skewX(-15deg);  opacity: 1; }
+  100% { transform: translateX(120%) skewX(-15deg);  opacity: 0; }
+}
+
+.card-shimmer {
+  animation: cardShimmer 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── Animated Gradient Title Text ──────────────────────────────────────── */
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-title {
+  background: linear-gradient(135deg, #1c1917 0%, #c2410c 35%, #ea580c 50%, #1c1917 65%, #c2410c 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease-in-out infinite;
+}
+
+/* ── Ambient Particle Drift ────────────────────────────────────────────── */
+
+@keyframes particleDrift {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(-44vh) translateX(20px);
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(50px);
+    opacity: 0;
+  }
+}
+
+/* ── Heading Wipe-In ───────────────────────────────────────────────────── */
+
+@keyframes wipeIn {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+.wipe-in {
+  animation: wipeIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Global resets ─────────────────────────────────────────────────────── */
 
 * {
   box-sizing: border-box;

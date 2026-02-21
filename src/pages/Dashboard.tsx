@@ -20,6 +20,13 @@ const DECKS: Deck[] = [
     slideCount: 4,
     href: '/template',
   },
+  {
+    id: 2,
+    title: 'JPCS Google Personal Safety Presentation',
+    lastEdited: 'Edited Feb 20, 2026',
+    slideCount: 17,
+    href: '/jpcs-personal-safety',
+  },
 ]
 
 // ---------------------------------------------------------------------------

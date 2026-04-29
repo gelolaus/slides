@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reveal.js Markdown Presentation</title>
+    <title>BWAI2026 presentation</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" id="theme" />
@@ -37,6 +37,28 @@
         max-height: 60vh;
         border-radius: 10px;
       }
+
+      .deck-watermark {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 35;
+        font-family: "Source Sans Pro", "Segoe UI", Arial, sans-serif;
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 1;
+        color: #666;
+        letter-spacing: 0;
+        text-transform: none;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 120ms linear;
+      }
+
+      .deck-watermark.visible {
+        opacity: 1;
+      }
     </style>
   </head>
   <body>
@@ -56,13 +78,54 @@
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
     <script>
+      const markdownSection = document.querySelector(".slides section[data-markdown]");
+      if (markdownSection) {
+        markdownSection.setAttribute("data-markdown", `slides.md?v=${Date.now()}`);
+      }
+
+      const watermark = document.createElement("div");
+      watermark.className = "deck-watermark";
+      watermark.textContent = "slides.gelolaus.com";
+      document.body.appendChild(watermark);
+
+      const updateWatermarkVisibility = () => {
+        watermark.classList.toggle("visible", Reveal.getProgress() > 0);
+      };
+
+      const positionWatermark = () => {
+        const leftArrow = document.querySelector(".reveal .controls .navigate-left");
+        if (!leftArrow) return;
+
+        const arrowRect = leftArrow.getBoundingClientRect();
+        const watermarkRect = watermark.getBoundingClientRect();
+        const gap = 12;
+
+        const left = arrowRect.left - watermarkRect.width - gap;
+        const top = arrowRect.top + arrowRect.height / 2 - watermarkRect.height / 2;
+
+        watermark.style.left = `${Math.max(8, left)}px`;
+        watermark.style.top = `${Math.max(8, top)}px`;
+      };
+
       Reveal.initialize({
         hash: true,
-        slideNumber: "c/t",
+        progress: false,
         transition: "none",
         backgroundTransition: "none",
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
+
+      Reveal.on("ready", () => {
+        updateWatermarkVisibility();
+        positionWatermark();
+      });
+
+      Reveal.on("slidechanged", () => {
+        updateWatermarkVisibility();
+        positionWatermark();
+      });
+
+      window.addEventListener("resize", positionWatermark);
     </script>
   </body>
 </html>

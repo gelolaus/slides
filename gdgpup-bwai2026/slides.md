@@ -1,3 +1,11 @@
+<!-- .slide: data-background-image="images/canva-down.png" data-background-size="cover" data-background-position="center" -->
+
+--
+
+<!-- .slide: data-background-image="images/canva-down2.png" data-background-size="cover" data-background-position="center" -->
+
+---
+
 <img src="images/notion-logo.png" alt="Notion Logo" style="width:30%;height:auto;" />
 
 # Inside the Blueprint
@@ -46,6 +54,38 @@ Get your workspace ready.
 
 --
 
+<img src="images/eypi-qr-freenotioneducation.png" alt="Free Notion" style="width:50%;height:auto;" />
+
+--
+
+<!-- .slide: data-background-image="images/activation-step1.png" data-background-size="cover" data-background-position="center" -->
+
+--
+
+<!-- .slide: data-background-image="images/activation-step2.png" data-background-size="cover" data-background-position="center" -->
+
+--
+
+<!-- .slide: data-background-image="images/activation-step3.png" data-background-size="cover" data-background-position="center" -->
+
+--
+
+<!-- .slide: data-background-image="images/activation-step4.png" data-background-size="cover" data-background-position="center" -->
+
+--
+
+<!-- .slide: data-background-image="images/activation-step5.png" data-background-size="cover" data-background-position="center" -->
+
+--
+
+<!-- .slide: data-background-image="images/activation-step6.png" data-background-size="cover" data-background-position="center" -->
+
+--
+
+<img src="images/eypi-qr-freenotioneducation.png" alt="Free Notion" style="width:50%;height:auto;" />
+
+--
+
 ## 🎁 Challenge
 
 --
@@ -71,6 +111,10 @@ Notion is not a notepad. It's a relational database system.
 * **Aesthetics == Efficiency:** Clean layouts reduce cognitive load.
 * **Clutter Control:** Use toggles and synced blocks to keep the "Blueprint" readable.
 * **BLUF:** Keep high-level summaries at the top of every page.
+
+--
+
+<img src="images/eypi-qr-gdgocpupbwai2026.png" alt="Notion Templates" style="width:50%;height:auto;" />
 
 ---
 
@@ -122,4 +166,24 @@ Build Systems, not just notes.
 
 ---
 
+No, I never tried creating my deck in Canva nor Google Slides to show how easily we can use Gemini to create slides nowadays.
+
+---
+
 # Connect with Me!
+
+--
+
+<!-- .slide: data-background-image="images/merry-bday.png" data-background-size="cover" data-background-position="center" -->
+
+---
+
+<img src="images/notion-logo.png" alt="Notion Logo" style="width:30%;height:auto;" />
+
+# Inside the Blueprint
+
+### Documenting Ideas into Working Systems
+
+<br>
+Presented by Angelo Laus<br>
+a Notion Campus Leader

@@ -1,3 +1,9 @@
+# WIFI
+### SSID: Yspacesph
+### PASS: Knowyourspac3!
+
+---
+
 <!-- .slide: data-background-image="images/canva-down.png" data-background-size="cover" data-background-position="center" -->
 
 --
@@ -29,6 +35,10 @@ a Notion Campus Leader
 --
 
 <img src="images/eypi-qr-gelolinkedin.png" alt="Notion Logo" style="width:50%;height:auto;" />
+
+--
+
+## Access this slide: slides.gelolaus.com
 
 ---
 

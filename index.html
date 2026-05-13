@@ -1,73 +1,819 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gelo's Slides Directory</title>
+    <title>gelolaus · Slides</title>
+    <meta name="description" content="Presentation slides and decks by @gelolaus — Angelo Laus." />
+    <meta property="og:title" content="gelolaus · Slides" />
+    <meta property="og:description" content="Presentation slides and decks by @gelolaus — Angelo Laus." />
+    <meta property="og:url" content="https://slides.gelolaus.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
     <style>
+      /* ─── Color tokens ─── */
       :root {
-        color-scheme: light;
+        --color-bg: #F5F5F5;
+        --color-surface: #FFFFFF;
+        --color-surface-raised: #FAFAFA;
+        --color-border: #E8E8E8;
+        --color-text: #0A0A0A;
+        --color-text-muted: #6B6B6B;
+        --color-accent: #FF3B30;
+        --color-dot: #000000;
+      }
+
+      [data-theme="dark"] {
+        --color-bg: #000000;
+        --color-surface: #161616;
+        --color-surface-raised: #1F1F1F;
+        --color-border: #262626;
+        --color-text: #F5F5F5;
+        --color-text-muted: #AAAAAA;
+        --color-accent: #FF3B30;
+        --color-dot: #FFFFFF;
+      }
+
+      /* ─── Base ─── */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        height: 100%;
+        scroll-behavior: smooth;
       }
 
       body {
-        margin: 0;
-        font-family: "Source Sans Pro", "Segoe UI", Arial, sans-serif;
-        background: #f7f7f8;
-        color: #1f2937;
+        background-color: var(--color-bg);
+        background-image: radial-gradient(circle, var(--color-dot) 0.75px, transparent 0.75px);
+        background-size: 120px 120px;
+        color: var(--color-text);
+        font-family: 'Geist', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        cursor: none;
+        user-select: none;
+        -webkit-user-select: none;
+        transition: background-color 0.4s ease, color 0.3s ease;
       }
 
-      .wrap {
-        max-width: 820px;
-        margin: 56px auto;
-        padding: 0 20px;
+      p, h1, h2, h3, h4, h5, h6, blockquote, li {
+        user-select: text;
+        -webkit-user-select: text;
       }
 
-      h1 {
-        margin: 0 0 8px;
-        font-size: 2rem;
+      @media (max-width: 767px) {
+        body { background-position: center; }
+        .footer-dark { background-position: center; }
       }
 
-      p {
-        margin: 0 0 24px;
-        color: #4b5563;
+      @media (pointer: coarse) {
+        body { cursor: auto; }
+        .footer-link:hover { color: #F5F5F5; }
+        .footer-link:hover .footer-arrow { transform: none; }
       }
 
-      .card {
-        display: block;
-        padding: 16px 18px;
-        margin-bottom: 12px;
-        border: 1px solid #e5e7eb;
-        border-radius: 10px;
-        background: #ffffff;
-        color: #111827;
+      ::selection {
+        background-color: var(--color-accent);
+        color: #fff;
+      }
+
+      ::-webkit-scrollbar { width: 3px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 9999px; }
+
+      /* ─── Fluid type scale ─── */
+      .text-hero    { font-size: clamp(2.8rem, 8vw, 7rem);    line-height: 0.92; letter-spacing: -0.04em; }
+      .text-display { font-size: clamp(2.5rem, 5.5vw, 6rem);  line-height: 1.0;  letter-spacing: -0.03em; }
+      .text-heading { font-size: clamp(1.25rem, 2.5vw, 2rem); line-height: 1.2;  letter-spacing: -0.02em; }
+      .text-body-lg { font-size: clamp(1rem, 1.2vw, 1.125rem); line-height: 1.75; }
+      .text-caption { font-size: clamp(0.875rem, 1.2vw, 1rem); line-height: 1.5; letter-spacing: 0.08em; font-weight: 600; }
+
+      /* ─── Link underline draw ─── */
+      .link-underline { position: relative; text-decoration: none; }
+      .link-underline::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .link-underline:hover::after { transform: scaleX(1); }
+
+      /* ─── Footer always dark ─── */
+      .footer-dark {
+        background-color: #000000;
+        background-image: radial-gradient(circle, #FFFFFF 0.75px, transparent 0.75px);
+        background-size: 120px 120px;
+        color: #F5F5F5;
+        --color-text: #F5F5F5;
+        --color-text-muted: #666666;
+        --color-border: #1F1F1F;
+        --color-dot: #FFFFFF;
+      }
+
+      .footer-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+        border-top: 1px solid #1F1F1F;
         text-decoration: none;
+        color: #F5F5F5;
+        transition: color 0.2s ease;
+        cursor: none;
+      }
+      .footer-link:last-of-type { border-bottom: 1px solid #1F1F1F; }
+      .footer-link:hover { color: var(--color-accent); }
+      .footer-link:hover .footer-arrow { transform: translate(4px, -4px); }
+      .footer-arrow { transition: transform 0.25s ease; flex-shrink: 0; }
+
+      /* ─── Loader ─── */
+      #loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-bg);
+        pointer-events: none;
+      }
+      #loader-text {
+        font-family: 'Geist', system-ui, sans-serif;
+        font-size: clamp(2.5rem, 8vw, 6rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        opacity: 0;
+        user-select: none;
+        white-space: nowrap;
       }
 
-      .card:hover {
-        border-color: #93c5fd;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      /* ─── Custom cursor ─── */
+      #cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+        pointer-events: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #ffffff;
+        mix-blend-mode: difference;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+          height 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+          background 0.2s ease,
+          border-radius 0.25s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #cursor-label {
+        font-family: 'Geist', system-ui, sans-serif;
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: #fff;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.15s ease;
       }
 
-      .path {
+      /* ─── Particle canvas ─── */
+      #particle-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 9997;
+        pointer-events: none;
+      }
+
+      /* ─── Nav ─── */
+      #nav {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%) translateY(0);
+        z-index: 900;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border-radius: 9999px;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        backdrop-filter: blur(16px);
+        opacity: 1;
+        transition:
+          background 0.3s ease,
+          border-color 0.3s ease,
+          backdrop-filter 0.3s ease,
+          opacity 0.3s ease,
+          transform 0.3s ease;
+      }
+      #nav.hidden {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-100%);
+        pointer-events: none;
+      }
+
+      .nav-brand {
+        font-family: 'Geist', sans-serif;
+        font-weight: 500;
         font-size: 0.9rem;
-        color: #6b7280;
+        color: var(--color-text);
+        text-decoration: none;
+        margin-right: 16px;
+        letter-spacing: -0.01em;
+        cursor: none;
+      }
+      .nav-link {
+        font-family: 'Geist', sans-serif;
+        font-weight: 400;
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+        text-decoration: none;
+        padding: 4px 8px;
+        transition: color 0.2s ease;
+        cursor: none;
+      }
+      .nav-link:hover { color: var(--color-text); }
+
+      @media (max-width: 599px) {
+        #nav { gap: 4px; padding: 7px 12px; }
+        .nav-link.hide-mobile { display: none; }
+      }
+
+      #theme-toggle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid var(--color-border);
+        background: transparent;
+        cursor: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 8px;
+        transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        color: var(--color-text);
+        font-size: 14px;
+        line-height: 1;
+      }
+      #theme-toggle:hover {
+        background: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #fff;
+      }
+
+      /* ─── Scroll-to-top ─── */
+      #scroll-top {
+        position: fixed;
+        bottom: clamp(1.25rem, 3vw, 2rem);
+        right: clamp(1.25rem, 3vw, 2rem);
+        z-index: 800;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--color-border);
+        background: var(--color-surface);
+        color: var(--color-text);
+        font-size: 1.1rem;
+        cursor: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
+        transition:
+          border-color 0.2s ease,
+          background 0.2s ease,
+          color 0.2s ease,
+          opacity 0.25s ease,
+          transform 0.25s ease;
+      }
+      #scroll-top.visible {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+      #scroll-top:hover {
+        border-color: var(--color-accent);
+        background: var(--color-accent);
+        color: #fff;
+      }
+
+      /* ─── Hero ─── */
+      #hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding:
+          clamp(5rem, 12vw, 8rem)
+          clamp(1.5rem, 6vw, 6rem)
+          clamp(3rem, 6vw, 5rem);
+        overflow: hidden;
+      }
+      .hero-content { position: relative; z-index: 1; }
+
+      .hero-title {
+        font-family: 'Geist', sans-serif;
+        font-weight: 700;
+        color: var(--color-text);
+        line-height: 0.95;
+        margin-bottom: clamp(1.25rem, 3vw, 2rem);
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1), transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .hero-title.visible { opacity: 1; transform: translateY(0); }
+
+      .hero-sub {
+        font-family: 'Geist', sans-serif;
+        font-weight: 400;
+        font-size: clamp(1.3rem, 3.5vw, 2.25rem);
+        color: var(--color-text-muted);
+        letter-spacing: -0.02em;
+        line-height: 1.5;
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1) 0.22s, transform 0.75s cubic-bezier(0.4, 0, 0.2, 1) 0.22s;
+      }
+      .hero-sub.visible { opacity: 1; transform: translateY(0); }
+
+      .scroll-hint {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: clamp(3rem, 8vw, 5rem);
+        opacity: 0;
+        transition: opacity 0.6s ease 0.9s;
+      }
+      .scroll-hint.visible { opacity: 1; }
+
+      .scroll-arrow {
+        display: block;
+        font-size: 1.1rem;
+        color: var(--color-text-muted);
+        animation: bounce 1.6s ease-in-out infinite;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50%       { transform: translateY(6px); }
+      }
+
+      /* ─── Slides section ─── */
+      #slides {
+        padding:
+          clamp(4rem, 8vw, 6rem)
+          clamp(1.5rem, 6vw, 6rem)
+          clamp(6rem, 10vw, 8rem);
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .section-label {
+        font-family: 'Geist Mono', monospace;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--color-text-muted);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: clamp(2rem, 4vw, 3rem);
+      }
+
+      .slides-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+        gap: 1.5rem;
+      }
+
+      .slide-card {
+        display: block;
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        background: var(--color-surface);
+        text-decoration: none;
+        color: var(--color-text);
+        cursor: none;
+        transition:
+          border-color 0.25s ease,
+          box-shadow 0.25s ease,
+          transform 0.25s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .slide-card:hover {
+        border-color: var(--color-accent);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+      }
+
+      .slide-card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: clamp(1.5rem, 3vw, 2rem);
+      }
+
+      .slide-tag {
+        font-family: 'Geist Mono', monospace;
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--color-text-muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border: 1px solid var(--color-border);
+        border-radius: 9999px;
+      }
+
+      .slide-arrow {
+        font-size: 1.2rem;
+        color: var(--color-text-muted);
+        flex-shrink: 0;
+        transition: transform 0.25s ease, color 0.25s ease;
+      }
+      .slide-card:hover .slide-arrow {
+        transform: translate(4px, -4px);
+        color: var(--color-accent);
+      }
+
+      .slide-title {
+        font-family: 'Geist', sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+      }
+
+      .slide-description {
+        font-family: 'Geist', sans-serif;
+        font-size: clamp(0.875rem, 1.2vw, 1rem);
+        color: var(--color-text-muted);
+        line-height: 1.65;
+        margin-bottom: clamp(1.5rem, 2.5vw, 2rem);
+      }
+
+      .slide-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .slide-event {
+        font-family: 'Geist', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--color-text-muted);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .slide-event::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        flex-shrink: 0;
       }
     </style>
   </head>
+
   <body>
-    <main class="wrap">
-      <h1>Slides Directory</h1>
-      <p>Select a deck:</p>
+    <!-- Loader -->
+    <div id="loader">
+      <div id="loader-text">
+        <span style="color: var(--color-accent)">@</span><span style="color: var(--color-text)">gelolaus</span>
+      </div>
+    </div>
 
-      <a class="card" href="./gdgpup-bwai2026/">
-        <strong>GDG PUP BWAI 2026</strong><br />
-        <span class="path">/gdgpup-bwai2026/</span>
-      </a>
+    <!-- Custom cursor -->
+    <div id="cursor"><span id="cursor-label"></span></div>
 
-      <a class="card" href="./comsect-act8/">
-        <strong>COMSECS7 Activity 8</strong><br />
-        <span class="path">/comsect-act8/</span>
-      </a>
+    <!-- Particle canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Nav -->
+    <nav id="nav">
+      <a href="https://gelolaus.com" class="nav-brand" data-cursor="nav">@gelolaus</a>
+      <a href="#slides" class="nav-link link-underline hide-mobile" data-cursor="nav">Slides</a>
+      <a href="#contact" class="nav-link link-underline hide-mobile" data-cursor="nav">Contact</a>
+      <button id="theme-toggle" data-cursor="nav" aria-label="Toggle dark mode">●</button>
+    </nav>
+
+    <!-- Scroll-to-top -->
+    <button id="scroll-top" data-cursor="nav" aria-label="Back to top">↑</button>
+
+    <!-- Main -->
+    <main>
+      <!-- Hero -->
+      <section id="hero">
+        <div class="hero-content">
+          <h1 class="hero-title text-hero">Slides.</h1>
+          <p class="hero-sub">A collection of talks&nbsp;&amp;&nbsp;presentations.</p>
+          <div class="scroll-hint">
+            <span class="scroll-arrow">↓</span>
+            <span
+              class="text-caption"
+              style="font-family:'Geist',sans-serif;color:var(--color-text-muted);letter-spacing:0.1em;text-transform:uppercase;font-size:0.8rem;"
+            >Scroll</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slides list -->
+      <section id="slides">
+        <p class="section-label">Presentations</p>
+        <div class="slides-grid">
+
+          <a class="slide-card" href="./gdgpup-bwai2026/" data-cursor="card">
+            <div class="slide-card-top">
+              <span class="slide-tag">Talk · 2026</span>
+              <span class="slide-arrow">↗</span>
+            </div>
+            <h2 class="slide-title">Inside the Blueprint</h2>
+            <p class="slide-description">
+              Documenting Ideas into Working Systems — a hands-on session on integrating Notion AI
+              and modern tools into your everyday workflow, presented at GDG PUP Build with AI 2026.
+            </p>
+            <div class="slide-meta">
+              <span class="slide-event">GDG PUP · Build with AI 2026</span>
+            </div>
+          </a>
+
+          <a class="slide-card" href="./comsect-act8/" data-cursor="card">
+            <div class="slide-card-top">
+              <span class="slide-tag">Activity · APC</span>
+              <span class="slide-arrow">↗</span>
+            </div>
+            <h2 class="slide-title">Financial Resilience Playbook</h2>
+            <p class="slide-description">
+              A COMSECS7 case study on perimeter breach via N-day vulnerability — covering
+              risk management, business continuity, and disaster recovery using the NIST framework.
+            </p>
+            <div class="slide-meta">
+              <span class="slide-event">COMSECS7 · Asia Pacific College</span>
+            </div>
+          </a>
+
+        </div>
+      </section>
     </main>
+
+    <!-- Footer — exact gelolaus.com Contact section -->
+    <footer id="contact" class="footer-dark" style="width:100%;">
+      <div style="padding:clamp(4rem,8vw,6rem) clamp(1.5rem,6vw,6rem) clamp(2.5rem,5vw,4rem);max-width:1400px;margin:0 auto;">
+        <h2
+          class="text-hero"
+          style="font-family:'Geist',sans-serif;font-weight:700;color:#F5F5F5;letter-spacing:-0.04em;line-height:0.95;margin-bottom:clamp(3rem,6vw,5rem);max-width:900px;"
+        >
+          Let&apos;s build something.
+        </h2>
+
+        <nav>
+          <a href="mailto:hello@gelolaus.com" class="footer-link" data-cursor="cta">
+            <span style="font-family:'Geist',sans-serif;font-weight:500;font-size:clamp(1.2rem,3vw,2rem);letter-spacing:-0.03em;">Email</span>
+            <span class="footer-arrow" style="font-size:clamp(1.2rem,3vw,2rem);margin-left:1rem;">↗</span>
+          </a>
+          <a href="https://facebook.com/gelolaus" target="_blank" rel="noopener noreferrer" class="footer-link" data-cursor="cta">
+            <span style="font-family:'Geist',sans-serif;font-weight:500;font-size:clamp(1.2rem,3vw,2rem);letter-spacing:-0.03em;">Facebook</span>
+            <span class="footer-arrow" style="font-size:clamp(1.2rem,3vw,2rem);margin-left:1rem;">↗</span>
+          </a>
+          <a href="https://instagram.com/gelolaus" target="_blank" rel="noopener noreferrer" class="footer-link" data-cursor="cta">
+            <span style="font-family:'Geist',sans-serif;font-weight:500;font-size:clamp(1.2rem,3vw,2rem);letter-spacing:-0.03em;">Instagram</span>
+            <span class="footer-arrow" style="font-size:clamp(1.2rem,3vw,2rem);margin-left:1rem;">↗</span>
+          </a>
+          <a href="https://linkedin.com/in/gelolaus" target="_blank" rel="noopener noreferrer" class="footer-link" data-cursor="cta">
+            <span style="font-family:'Geist',sans-serif;font-weight:500;font-size:clamp(1.2rem,3vw,2rem);letter-spacing:-0.03em;">LinkedIn</span>
+            <span class="footer-arrow" style="font-size:clamp(1.2rem,3vw,2rem);margin-left:1rem;">↗</span>
+          </a>
+        </nav>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;border-top:1px solid #1F1F1F;gap:1rem;flex-wrap:wrap;">
+          <span class="text-caption" style="font-family:'Geist',sans-serif;color:#444;letter-spacing:0.06em;">@GELOLAUS</span>
+          <span class="text-caption" id="footer-year" style="font-family:'Geist',sans-serif;color:#444;letter-spacing:0.06em;"></span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- GSAP (sync load so it's available before our script runs) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+      /* ─── Footer year ─── */
+      document.getElementById('footer-year').textContent = `ANGELO LAUS · ${new Date().getFullYear()}`;
+
+      /* ─── Theme ─── */
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('theme-toggle');
+      let isDark = false;
+
+      function setTheme(dark) {
+        isDark = dark;
+        html.dataset.theme = dark ? 'dark' : 'light';
+        themeBtn.textContent = dark ? '○' : '●';
+        // Update loader background when toggling
+        const loader = document.getElementById('loader');
+        if (loader) loader.style.background = dark ? '#000000' : '#F5F5F5';
+      }
+
+      themeBtn.addEventListener('click', () => setTheme(!isDark));
+
+      /* ─── Nav auto-hide on scroll ─── */
+      const nav = document.getElementById('nav');
+      let lastScrollY = 0;
+
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY < 40) {
+          nav.classList.remove('hidden');
+        } else if (currentScrollY > lastScrollY) {
+          nav.classList.add('hidden');
+        } else {
+          nav.classList.remove('hidden');
+        }
+        lastScrollY = currentScrollY;
+      }, { passive: true });
+
+      /* ─── Scroll-to-top button ─── */
+      const scrollTopBtn = document.getElementById('scroll-top');
+
+      window.addEventListener('scroll', () => {
+        scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
+      }, { passive: true });
+
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      /* ─── Custom cursor ─── */
+      const cursor = document.getElementById('cursor');
+      const cursorLabel = document.getElementById('cursor-label');
+      const isTouch = window.matchMedia('(pointer: coarse)').matches;
+
+      if (!isTouch) {
+        let mouseX = 0, mouseY = 0;
+
+        const states = {
+          default: { w: '24px', h: '24px', bg: '#ffffff', r: '50%',     blend: 'difference', label: '' },
+          nav:     { w: '34px', h: '34px', bg: 'var(--color-accent)', r: '50%',     blend: 'normal',     label: '' },
+          card:    { w: '80px', h: '80px', bg: 'var(--color-accent)', r: '50%',     blend: 'normal',     label: 'VIEW →' },
+          cta:     { w: '48px', h: '48px', bg: 'var(--color-accent)', r: '9999px',  blend: 'normal',     label: '' },
+          click:   { w: '8px',  h: '8px',  bg: '#ffffff',             r: '50%',     blend: 'difference', label: '' },
+        };
+
+        function applyCursor(state) {
+          const s = states[state] || states.default;
+          cursor.style.width          = s.w;
+          cursor.style.height         = s.h;
+          cursor.style.background     = s.bg;
+          cursor.style.borderRadius   = s.r;
+          cursor.style.mixBlendMode   = s.blend;
+          cursorLabel.textContent     = s.label;
+          cursorLabel.style.opacity   = s.label ? '1' : '0';
+        }
+
+        window.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          cursor.style.left = mouseX + 'px';
+          cursor.style.top  = mouseY + 'px';
+          const el = e.target.closest('[data-cursor]');
+          applyCursor(el ? el.dataset.cursor : 'default');
+        });
+
+        window.addEventListener('mousedown', () => applyCursor('click'));
+        window.addEventListener('mouseup', () => {
+          const el = document.elementFromPoint(mouseX, mouseY)?.closest('[data-cursor]');
+          applyCursor(el ? el.dataset.cursor : 'default');
+        });
+      }
+
+      /* ─── Particle canvas ─── */
+      const canvas  = document.getElementById('particle-canvas');
+      const ctx     = canvas.getContext('2d');
+      const PALETTE = ['#FF3B30','#FF9500','#FFCC00','#30D158','#007AFF','#BF5AF2','#FF375F','#00C7BE'];
+      const MAX_P   = 100;
+      const SPAWN   = 3;
+
+      let particles = [];
+      let isDown = false;
+      let mX = 0, mY = 0;
+
+      function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function spawnParticle(x, y) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 1.5 + Math.random() * 2;
+        return {
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          size: [4, 6, 8, 10][Math.floor(Math.random() * 4)],
+          alpha: 1,
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() - 0.5) * 0.18,
+          color: PALETTE[Math.floor(Math.random() * PALETTE.length)],
+        };
+      }
+
+      (function tick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (isDown) {
+          for (let i = 0; i < SPAWN; i++) {
+            particles.push(spawnParticle(mX, mY));
+            if (particles.length > MAX_P) particles.shift();
+          }
+        }
+        particles = particles.filter(p => {
+          p.x += p.vx; p.y += p.vy;
+          p.alpha -= 0.016;
+          p.rotation += p.rotationSpeed;
+          if (p.alpha <= 0) return false;
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle   = p.color;
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rotation);
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+          return true;
+        });
+        requestAnimationFrame(tick);
+      })();
+
+      if (!isTouch) {
+        window.addEventListener('mousedown', (e) => { isDown = true; mX = e.clientX; mY = e.clientY; });
+        window.addEventListener('mousemove', (e) => { if (e.buttons === 0) isDown = false; mX = e.clientX; mY = e.clientY; });
+        window.addEventListener('mouseup',   ()  => { isDown = false; });
+      }
+
+      /* ─── Loader ─── */
+      function revealPage() {
+        document.querySelector('.hero-title').classList.add('visible');
+        document.querySelector('.hero-sub').classList.add('visible');
+        document.querySelector('.scroll-hint').classList.add('visible');
+      }
+
+      const loader     = document.getElementById('loader');
+      const loaderText = document.getElementById('loader-text');
+
+      const fallback = setTimeout(() => {
+        loader.style.display = 'none';
+        revealPage();
+      }, 3000);
+
+      if (typeof gsap !== 'undefined') {
+        gsap.timeline({
+          onComplete() {
+            clearTimeout(fallback);
+            loader.style.display = 'none';
+            revealPage();
+          }
+        })
+        .fromTo(loaderText,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+        )
+        .to({}, { duration: 0.5 })
+        .to(loaderText, { scale: 40, opacity: 0, duration: 0.85, ease: 'power3.in' }, 'exit')
+        .to(loader,     { opacity: 0, duration: 0.55, ease: 'power2.in'             }, 'exit+=0.25');
+      } else {
+        clearTimeout(fallback);
+        loader.style.display = 'none';
+        revealPage();
+      }
+    </script>
   </body>
 </html>
